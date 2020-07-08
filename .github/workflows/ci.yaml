@@ -13,15 +13,15 @@ jobs:
         with:
           path: ${{ env.WORKING_DIR }}
 
-      - name: Fetch dependencies
-        run: |
-          echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee -a /etc/apt/sources.list > /dev/null
-          wget -O - https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
-          sudo apt-get install bazel
-          sudo apt-get -qq update
-          sudo apt-get install -y libelf-dev libssl-dev libcap-dev linux-tools-`uname -r`
-          git submodule update --init --recursive
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+          # - name: Fetch dependencies
+          #   run: |
+          #     echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee -a /etc/apt/sources.list > /dev/null
+          #     wget -O - https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
+          #     sudo apt-get install bazel
+          #     sudo apt-get -qq update
+          #     sudo apt-get install -y libelf-dev libssl-dev libcap-dev linux-tools-`uname -r`
+          #     git submodule update --init --recursive
+          #     sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
 
       - name: Build
         run: bazel build //src:all //src/quipper:all
